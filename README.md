@@ -1,6 +1,6 @@
 # EasyApi
 
-**TODO: Add description**
+Build API server easily.
 
 ## Installation
 
@@ -19,3 +19,10 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/easy_api](https://hexdocs.pm/easy_api).
 
+## Other libraries
+
+There are several awesome API-related packages.
+
+- [Open API Spex](https://github.com/open-api-spex/open_api_spex)
+- [JSONAPI Elixir](https://github.com/jeregrine/jsonapi)
+- [Parameters](https://github.com/imranismail/parameters.ex)
