@@ -1,0 +1,92 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Sample API
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:4000/api
+paths:
+  /posts:
+    get:
+      summary: List all posts
+      operationId: listPosts
+      tags:
+        - posts
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 50)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: A paged array of posts
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Posts"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /posts/{slug}:
+    get:
+      summary: Info for a specific post
+      operationId: showPostbySlug
+      tags:
+        - posts
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: The slug of the post to retrieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Posts"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Post:
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+    Posts:
+      type: array
+      items:
+        $ref: "#/components/schemas/Post"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
